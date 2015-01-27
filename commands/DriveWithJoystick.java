@@ -1,5 +1,6 @@
 package org.usfirst.frc.team904.robot.commands;
 
+import org.usfirst.frc.team904.robot.OI;
 import org.usfirst.frc.team904.robot.Robot;
 import org.usfirst.frc.team904.robot.subsystems.Drive;
 
@@ -34,12 +35,12 @@ public class DriveWithJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	//Robot.drive.end;
-    	
+    	Drive.end(); 
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

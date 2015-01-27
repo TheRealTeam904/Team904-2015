@@ -16,7 +16,7 @@ public class Drive extends Subsystem {
 	RobotDrive myClaw;
 	
 	public void Robot() {
-		
+		//Setting up the Robot drive basic functions
     	myRobot.setExpiration(0.1);
         myRobot = new RobotDrive(RobotMap.leftFrontMotor, RobotMap.leftBackMotor, RobotMap.rightFrontMotor, RobotMap.rightBackMotor);
     	myRobot.setInvertedMotor(MotorType.kFrontLeft, true);	// invert the left side motors
@@ -40,7 +40,12 @@ public class Drive extends Subsystem {
     }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     	setDefaultCommand(new DriveWithJoystick());
     }
+
+    //Do I actually have to have this here? Test with and without
+	public static void end() {
+		// TODO Auto-generated method stub
+		myRobot.mecanumDrive_Cartesian(0, 0, 0, 0);
+	}
 }
