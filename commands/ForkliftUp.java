@@ -10,8 +10,6 @@ import org.usfirst.frc.team904.robot.subsystems.Forklift;
 public class ForkliftUp extends Command {
 
     public ForkliftUp() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.forklift);
     }
 

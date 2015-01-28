@@ -14,10 +14,9 @@ public class RobotMap {
     public static int rightFrontMotor = 2;
     public static int leftBackMotor = 3;
     public static int rightBackMotor = 4;
-    public static int forkliftMotor = 5;
-    public static int clawMotor = 6;
     public static int joystickChannel = 0;
-    public static int talonChannel = 7;
+    public static int forkliftChannel = 7;
+    public static int spikeChannel = 0;
     
     
     // If you are using multiple modules, make sure to define both the port

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team904.robot.commands;
 
-import org.usfirst.frc.team904.robot.OI;
 import org.usfirst.frc.team904.robot.Robot;
 import org.usfirst.frc.team904.robot.subsystems.Drive;
 
@@ -13,8 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveWithJoystick extends Command {
 
     public DriveWithJoystick() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.drive);
     }
 

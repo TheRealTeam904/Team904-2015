@@ -10,6 +10,8 @@ import org.usfirst.frc.team904.robot.RobotMap;
 import org.usfirst.frc.team904.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team904.robot.commands.ExampleCommand;
 import org.usfirst.frc.team904.robot.commands.ForkliftUp;
+import org.usfirst.frc.team904.robot.commands.ArmMotion;
+import org.usfirst.frc.team904.robot.subsystems.Arms;
 import org.usfirst.frc.team904.robot.subsystems.Drive;
 import org.usfirst.frc.team904.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team904.robot.subsystems.Forklift;
@@ -26,12 +28,15 @@ public class Robot extends IterativeRobot {
 	//When the robot first starts, a new subsystem and drive are made
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final Drive drive = new Drive();
-	public static final Forklift forklift = new Forklift(RobotMap.talonChannel, 0, 0, 0, 0);
+	public static final Forklift forklift = new Forklift(RobotMap.forkliftChannel, 0, 0);
+	public static final Arms arms = new Arms(RobotMap.spikeChannel, 0,0);  //Added by JKlein
 	public static OI oi;
 
     Command autonomousCommand;
     Command drivingCommand;
     Command forkliftUp;
+    Command ArmMotion;
+    
 
     /**
      * This function is run when the robot is first started up and should be
@@ -45,6 +50,8 @@ public class Robot extends IterativeRobot {
         autonomousCommand = new ExampleCommand();
         drivingCommand = new DriveWithJoystick();
         forkliftUp = new ForkliftUp();
+        ArmMotion = new ArmMotion();
+        
     }
 	
 	public void disabledPeriodic() {

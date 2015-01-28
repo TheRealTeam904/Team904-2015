@@ -1,5 +1,8 @@
 package org.usfirst.frc.team904.robot;
 
+import org.usfirst.frc.team904.robot.commands.ArmMotion;
+import org.usfirst.frc.team904.robot.commands.ArmRelease;
+import org.usfirst.frc.team904.robot.commands.ForkliftDown;
 import org.usfirst.frc.team904.robot.commands.ForkliftUp;
 
 import edu.wpi.first.wpilibj.*;
@@ -13,14 +16,13 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
     //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
-    // number it is.
-    // Joystick stick = new Joystick(port);
-    //Button button1 = new JoystickButton(stick, 1);
+
 	public static Joystick stick = new Joystick(RobotMap.joystickChannel);
-    public static Button forkliftUpButton = new JoystickButton(stick, 1);
-	public static Button forkliftDownButton = new JoystickButton(stick, 2);
+	public static Joystick stickOperation = new Joystick(RobotMap.joystickChannel);
+    public static Button forkliftUpButton = new JoystickButton(stickOperation, 1);
+	public static Button forkliftDownButton = new JoystickButton(stickOperation, 2);
+	public static Button armsGripButton = new JoystickButton(stickOperation, 3);
+	public static Button armsReleaseButton = new JoystickButton(stickOperation, 4);
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
@@ -32,10 +34,11 @@ public class OI {
         
         // Start the command when the button is pressed and let it run the command
         // until it is finished as determined by it's isFinished method.
-        //button1.whenPressed(new ExampleCommand());
     	forkliftUpButton.whenPressed(new ForkliftUp());
-        forkliftDownButton.whenPressed(new ForkliftUp()); //Change this to down when method is created
-
+        forkliftDownButton.whenPressed(new ForkliftDown()); 
+        armsGripButton.whenPressed(new ArmMotion());
+        armsReleaseButton.whenPressed(new ArmRelease());
+        
     }
     // Run the command while the button is being held down and interrupt it once
     // the button is released.
