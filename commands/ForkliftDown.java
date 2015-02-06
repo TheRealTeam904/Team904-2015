@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ForkliftDown extends Command {
 
     public ForkliftDown() {
-    	requires(Robot.forklift);
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.forklift);
     }
 
     // Called just before this Command runs the first time

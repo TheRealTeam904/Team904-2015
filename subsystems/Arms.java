@@ -1,46 +1,35 @@
 package org.usfirst.frc.team904.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.command.Subsystem;
-
-
-
-
 import org.usfirst.frc.team904.robot.RobotMap;
-//import org.usfirst.frc.team904.robot.*;
-import org.usfirst.frc.team904.robot.commands.ForkliftUp;
+import org.usfirst.frc.team904.robot.commands.ArmOpen;
+import org.usfirst.frc.team904.robot.commands.clawDoNothing;
+
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-@SuppressWarnings("unused")
 public class Arms extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	//private Encoder m_shaftEncoder;							// Shaft encoder attached to the shaft driving the forklift
 	private static Relay ArmRelay;								// Relay which drives the forklift
-	
-	//private static final double baseHeight = 0; 			// Forklift base height above ground (cm)
-	
+
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-    	setDefaultCommand(new ForkliftUp());
+        setDefaultCommand(new clawDoNothing());
     }
     public Arms(int relayChannel, 
 			int encoder_aSource, 
 			int encoder_bSource
 			) {
-		//System.out.println("Forklift Initialization");
 		// Set up our class variables
 		//m_shaftEncoder = new Encoder(encoder_aSource, encoder_bSource);
 		ArmRelay = new Relay(RobotMap.spikeChannel);
 		System.out.println("Arms Initialization complete");
 		
-		// Place the forklift in its initial state
 		//m_shaftEncoder.reset();
 		ArmRelay.set(Relay.Value.kOff);
     }
@@ -56,7 +45,7 @@ public class Arms extends Subsystem {
 	}
     public static void stop() {
 		ArmRelay.set(Relay.Value.kOff);
-		System.out.println("\nArm stopped!");
+		Timer.delay(0.005);
 	}
 }
 

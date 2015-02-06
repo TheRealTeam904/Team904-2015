@@ -1,18 +1,18 @@
-
 package org.usfirst.frc.team904.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team904.robot.Robot;
+import org.usfirst.frc.team904.robot.subsystems.Forklift;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ExampleCommand extends Command {
+public class forkliftDoNothing extends Command {
 
-    public ExampleCommand() {
+    public forkliftDoNothing() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.exampleSubsystem);
+        requires(Robot.forklift);
     }
 
     // Called just before this Command runs the first time
@@ -21,6 +21,7 @@ public class ExampleCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Forklift.stop();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,6 +31,7 @@ public class ExampleCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Forklift.stop();
     }
 
     // Called when another command which requires one or more of the same

@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ArmRelease extends Command {
-
-    public ArmRelease() {
+	
+	public ArmRelease() {
     	requires(Robot.arms);
     }
 

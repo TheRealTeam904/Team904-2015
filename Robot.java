@@ -6,15 +6,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team904.robot.RobotMap;
-import org.usfirst.frc.team904.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team904.robot.commands.ExampleCommand;
-import org.usfirst.frc.team904.robot.commands.ForkliftUp;
-import org.usfirst.frc.team904.robot.commands.ArmMotion;
-import org.usfirst.frc.team904.robot.subsystems.Arms;
-import org.usfirst.frc.team904.robot.subsystems.Drive;
-import org.usfirst.frc.team904.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team904.robot.subsystems.Forklift;
+import org.usfirst.frc.team904.robot.commands.*;
+
+import org.usfirst.frc.team904.robot.subsystems.*;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,44 +19,46 @@ import org.usfirst.frc.team904.robot.subsystems.Forklift;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	
-	//When the robot first starts, a new subsystem and drive are made
+
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final Arms arms = new Arms(RobotMap.spikeChannel, 0,0);
+	public static final Forklift forklift = new Forklift(RobotMap.forkliftChannel, 0,0);
 	public static final Drive drive = new Drive();
-	public static final Forklift forklift = new Forklift(RobotMap.forkliftChannel, 0, 0);
-	public static final Arms arms = new Arms(RobotMap.spikeChannel, 0,0);  //Added by JKlein
+
 	public static OI oi;
 
-    Command autonomousCommand;
-    Command drivingCommand;
-    Command forkliftUp;
-    Command ArmMotion;
-    
+    Command autonomousCommand,
+    ArmOpen,
+    ArmRelease,
+    clawDoNothing,
+    ForkliftUp,
+    ForkliftDown,
+    forkliftDoNothing,
+    DriveWithJoystick;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-		//When the robot launches, it will create a new OI
-    	oi = new OI();
+		oi = new OI();
         // instantiate the command used for the autonomous period
-    	//Okay so here it is making whatever commands you want to use
         autonomousCommand = new ExampleCommand();
-        drivingCommand = new DriveWithJoystick();
-        forkliftUp = new ForkliftUp();
-        ArmMotion = new ArmMotion();
-        
+        ArmOpen = new ArmOpen();
+        ArmRelease = new ArmRelease();
+        clawDoNothing = new clawDoNothing();
+        ForkliftUp = new ForkliftUp();
+        ForkliftDown = new ForkliftDown();
+        forkliftDoNothing = new forkliftDoNothing();
+        DriveWithJoystick = new DriveWithJoystick();
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
-   
-	//This is automatically configured to run whenever the driver tells it to
+
     public void autonomousInit() {
         // schedule the autonomous command (example)
-    	//If autonomous command is equal to something, start it here
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
@@ -71,13 +68,14 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
     }
-   
-    //This is automatically configured to run whenever the driver tells it to
+
     public void teleopInit() {
-    	//Making sure that autonomous is canceled
+		// This makes sure that the autonomous stops running when
+        // teleop starts running. If you want the autonomous to 
+        // continue until interrupted by another command, remove
+        // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        //Starting DriveWithJoystick
-        if (drivingCommand != null) drivingCommand.start();
+        if (DriveWithJoystick != null) DriveWithJoystick.start();
     }
 
     /**
@@ -85,7 +83,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-    	drivingCommand.cancel();
+    	DriveWithJoystick.cancel();
     }
 
     /**
